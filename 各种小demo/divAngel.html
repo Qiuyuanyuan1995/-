@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>div 四个角突出显示</title>
+    <style>
+        div {
+            position: relative;
+            left: 50px;
+            top: 50px;
+            margin: 10px;
+            width: 500px;
+            height: 500px;
+            border: 1px solid blue;
+        }
+        span {
+            position: absolute;
+            padding: 5px;
+            border-style: solid;
+            border-color: blue;
+        }
+        .row1 {
+            border-width: 5px 0 0 5px;
+            top: -5px;
+            left: -5px;
+        }
+        .row2 {
+            border-width: 5px 5px 0 0;
+            top: -5px;
+            right: -5px;
+        }
+        .col1 {
+            border-width: 0 0 5px 5px;
+            bottom: -5px;
+            left: -5px;
+        }
+        .col2 {
+            border-width: 0 5px 5px 0;
+            bottom: -5px;
+            right: -5px;
+            /* border-color:#2c86ff */
+        }
+    </style>
+</head>
+
+<body>
+  <div>
+      <span class="row row1"></span>
+      <span class="row row2"></span>
+      <span class="col col2"></span>
+      <span class="col col1"></span>
+  </div>
+</body>
+
+</html>

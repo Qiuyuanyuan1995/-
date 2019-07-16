@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js简单的计时器</title>
+</head>
+<body onload="setTime()">
+    <div id="timing"></div>
+    <script>
+       function setTime(){
+            var timing = document.getElementById('timing');
+            var nowTime =new Date();
+            var nowHours =nowTime.getHours();
+            console.log(nowHours)
+            var nowMinutes= nowTime.getMinutes();
+            console.log(nowMinutes)
+            var nowSeconds = nowTime.getSeconds();
+            console.log(nowSeconds);
+            // 考虑到时间有<10的点数，比如这样的格式10:09:08
+           var h=formater(nowHours);
+           var s=formater(nowMinutes);
+           var m =formater(nowSeconds);
+            timing.innerHTML = h+':' + s+':'+ m;
+            setTimeout('setTime()',500);          
+       }
+       function formater(i){
+                  if(i<10){
+                      i = "0" + i;
+                      
+
+                  }
+                  return i
+            }
+       
+
+    </script>
+</body>
+</html>

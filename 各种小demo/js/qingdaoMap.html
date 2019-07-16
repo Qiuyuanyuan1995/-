@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      var chart = echarts.init(document.getElementById('main'));
+         var cityProper = {
+             '城阳区': 'js/chengyang.json',
+             '崂山区': 'js/laoshan.json',
+             '李沧区': 'js/licang.json',
+             '市北区': 'js/shibei.json',
+             '市南区': 'js/shinan.json',
+             '黄岛区': 'js/huangdao.json',
+             '胶州市': 'js/jiaozhou.json',
+             '即墨市': 'js/jimo.json',
+             '莱西市': 'js/laixi.json',
+             '平度市': 'js/pingdu.json'
+         };
+         var data = [{
+             name: '城阳区'
+         }, {
+             name: '崂山区'
+         }, {
+             name: '李沧区'
+         }, {
+             name: '市北区'
+         }, {
+             name: '市南区'
+         }, {
+             name: '黄岛区'
+         }, {
+             name: '胶州市'
+         }, {
+             name: '即墨市'
+         }, {
+             name: '莱西市'
+         }, {
+             name: '平度市'
+         }];
+
+         //获取青岛地图数据。
+         $.get('js/qingdao.json', function(getJSON) { 
+             echarts.registerMap("青岛",getJSON)
+                 option = {
+                     grid: {
+                        left: '5%',
+                        right: '4%',
+                        top:'0%',
+                        bottom: '0%',
+                        width:'100%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                         show: true,
+                         orient: 'vertical',
+                         x: 'right',
+                         y: 'center',
+                         feature: {
+                             mark: {
+                                 show: true
+                             },
+                             dataView: {
+                                 show: true,
+                                 readOnly: false
+                             }
+                         }
+                     },
+                     series: [{
+                         tooltip: {
+                             trigger: 'item'
+                         },
+                         name: '选择器',
+                         type: 'map',
+                         mapType: '青岛',
+                         left: '20%',
+                         top: '20%',
+                        
+                         roam: true,
+                         selectedMode: 'single',
+                         itemStyle: {
+                             normal: {
+                                 label: {
+                                     show: true
+                                 }
+                             },
+                             emphasis: {
+                                 label: {
+                                     show: true
+                                 }
+                             }
+                         },
+                         data: data
+                     }],
+                     animation: false
+                 };
+
+
+                 chart.setOption(option, false);
+                 
+                 chart.on("click", chartClick);
+            })
+            
+         function chartClick(param){ 
+            chart.setOption(option, false); 
+
+            var selectedPro = param.name;
+            if (!cityProper[selectedPro]) {
+                 option.series.splice(1);
+                 option.legend = null;
+                 option.visualMap = null;
+                 chart.setOption(option, true);
+                 return;
+             }
+            
+            //获取点击区域数据
+             $.get(cityProper[selectedPro], function(geojson) {
+                 echarts.registerMap(selectedPro, geojson);
+                 //根据需求，如果要替换青岛地图，series参数为[0]，不替换为[1],其中left、top自己设置。
+                 option.series[0] = {
+                     name: '选择器',
+                     type: 'map',
+                     mapType: selectedPro,
+                     left: '20%',
+                     top: '20%',
+                     width: '18%',
+                     roam: true,
+                     selectedMode: 'single',
+                     itemStyle: {
+                         normal: {
+                             label: {
+                                 show: true
+                             }
+                         },
+                         emphasis: {
+                             label: {
+                                 show: true
+                             }
+                         }
+                     },
+                     data: data
+                 };
+                
+                 chart.setOption(option, true);
+             })
+
+         };
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>柱形图bar&折线图</title>
+    <!-- 引入echart.js -->
+    <script src="./js/echarts.min.js"></script>
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <!-- 为echart准备一个具有宽高的dom -->
+    <div id="main" style="width:900px;height:600px;"></div>
+
+    <script type="text/javascript">
+        //   基于准备好的dom，初始化echar实例
+        var myChart = echarts.init(document.getElementById('main'))
+        // 制定图表的配置项和数据
+        var option = {
+            //标题
+            title: {
+                text: '各服装的销量情况',
+                // left: 'center'
+            },
+            // 提示框组件
+            tooltip: {
+                trigger: 'axis'
+            },
+            // 工具箱
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            // 保证legend（图例）和 线 的颜色是一致的
+            //  如果把red 从color数组中删除，则柱形图和折线图都呈现蓝色，说明一点，要分别设置
+            color: ['red', 'blue'],
+            // 图例
+            legend: {
+                data: [{
+                        // legend中的name要和series中的name保持一致，否则不会出现图例
+                        name: '销量',
+                    },
+                    {
+                        name: '产量',
+                    }
+                ],
+            },
+
+            // x轴
+            xAxis: {
+                data: [
+                    "衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"
+                ]
+            },
+            // y轴
+            yAxis: {},
+            // 数据
+            series: [{
+                    type: 'bar',
+                    name: '销量',
+                    data: [
+                        5, 20, 36, 10, 10, 20
+                    ]
+                },
+                {
+                    type: 'line',
+                    name: '产量',
+                    // 光滑的曲线
+                    smooth: true,
+                    data: [7, 30, 50, 11, 40, 80],
+                    // 保证legend（图例）和 线 的颜色是一致的
+                    lineStyle: {
+                        normal: {
+                            color: 'blue',
+                            width: 3
+                        },
+                        // color: {
+                        //     type: 'linear',
+                        //     x: 0,
+                        //     y: 0,
+                        //     x2: 0,
+                        //     y2: 1,
+                        //     colorStops: [{
+                        //         offset: 0,
+                        //         color: 'red' // 0% 处的颜色
+                        //     }, {
+                        //         offset: 1,
+                        //         color: 'blue' // 100% 处的颜色
+                        //     }],
+                        //     globalCoord: false // 缺省为 false
+                        // },
+                        // color: {
+                        //     type: 'radial',
+                        //     x: 0.5,
+                        //     y: 0.5,
+                        //     r: 0.5,
+                        //     colorStops: [{
+                        //         offset: 0,
+                        //         color: 'red' // 0% 处的颜色
+                        //     }, {
+                        //         offset: 1,
+                        //         color: 'blue' // 100% 处的颜色
+                        //     }],
+                        //     globalCoord: false // 缺省为 false
+                        // },
+                        width: 3,
+                        // shadowBlur:10
+
+                    },
+                    markPoint: {
+                        data: [{
+                                name: '最大值',
+                                type: 'max',
+                                symbol: 'pin',
+                                itemStyle: {
+                                    color: 'red'
+                                }
+                            },
+                            {
+                                name: '最小值',
+                                type: 'min',
+                                symbol: 'pin',
+                                itemStyle: {
+                                    color: 'black'
+                                }
+                            }
+                        ]
+                    },
+
+                }
+            ]
+
+
+        };
+        // 使用刚指定的配置项和数据
+        myChart.setOption(option)
+    </script>
+</body>
+
+</html>

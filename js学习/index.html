@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>for循环</title>
+</head>
+
+<body>
+    <button onclick="forBtn()">点击我触发for循环</button>
+    <p id="pId"></p>
+    <div id="x1">撒发生的爱妃</div>
+    <script>
+        /*
+         *因为放在外面是全局变量，每次执行click时，全局变量x的值不会重新清0
+         *如果放在click方法内部，就成为了局部变量，每次执行click时，都将x重新赋值为0了
+         *注意你var x="" 的位置，如果放在外面只有页面第一次初始化时才执行一次，后续不再执行。
+         *但是在函数内部，每次调用函数都是会执行一次
+         */
+        function forBtn() {
+            var documentId = document.getElementById('pId')
+            var x = "";
+            for (var i = 0; i <= 5; i++) {
+                x+='the number is:' + i + "<br/>"
+            }
+            documentId.innerHTML = x;
+        }
+        for (var i = 0; i < 5; i++) {
+            var arr = []
+            arr.push(i)
+        }
+        console.log(arr)
+
+
+        // 页面一进来就执行js
+        // var dicX1 = document.getElementById('x1').innerHTML;
+        //  function y(){
+        //   alert(dicX1);
+        //      }
+        //   window.onload = y();
+
+
+        //字符串对象
+         var txt = "Hello"
+        console.log(txt.length);
+        console.log(txt.indexOf('H')) 
+        console.log(txt.search('o')) 
+        console.log(txt.replace('o','t')) 
+    </script>
+</body>
+
+</html>

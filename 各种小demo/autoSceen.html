@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* body{
+          position: relative;
+       }  */
+        #one {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            margin-top: 10px;
+        }
+
+        #two {
+            width: 100px;
+            height: 100px;
+            /* border: 1px solid red; */
+            background: red;
+            margin-top: 60px;
+        }
+
+        #three {
+            width: 300px;
+            height: 305px;
+            /* border: 1px solid purple; */
+            background: purple;
+            position: absolute;
+            bottom: 0;
+            bottom: -10px;
+        }
+
+        /* @media(min-width:768px) {
+            #threeDiv {
+                font-size: 20px;
+                background-color: red;
+            }
+
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="one">
+        1
+    </div>
+    <p id="two">2</p>
+    <p id="three">
+        3
+    </p>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <script>
+        // 方法一
+        $(function () {
+            //给一个衡量的标准的高度，随便取（最好取当前可视区域高度，但不要超出当前可视区域的高度，否则变为负值了） 
+            var biaoZhunHeight = 757;
+            //获取当前浏览器可视区域高度
+            var currentHeight = $(window).height();//757
+            console.log(currentHeight)
+            // 当前浏览器可视区域高度 - 标准的高度 = 当屏幕变化多出的宽度
+            subHeight = currentHeight - biaoZhunHeight;
+            // 将多出的高度 平均分配给元素，也就是说让元素在原有的基础上增加多出来的高度，以此达到根据屏幕的变化而变化
+            avergePerHeight = parseInt(subHeight / 3)
+            //获取要目标元素 
+            var topHeight = $("#one");
+            var centerHeight = $("#two");
+            var bottomHeight = $("#three");
+            //获取目标元素的高度以 + 屏幕变化多出来的平均高度,然后赋值给当前元素最新的高度
+            topHeight.height(topHeight.height() + avergePerHeight)
+            centerHeight.height(centerHeight.height() + avergePerHeight)
+            bottomHeight.height(bottomHeight.height() + avergePerHeight)
+        })
+    </script>
+</body>
+
+</html>
